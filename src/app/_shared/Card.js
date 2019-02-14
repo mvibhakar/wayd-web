@@ -6,14 +6,12 @@ class Card extends Component {
       return (
         <div style={{
             backgroundColor: 'white',
-            minHeight: '100px',
             display: 'flex',
             flexDirection: 'column',
             margin: '20px',
             marginTop: '10px',
             padding: '20px',
-            alignItems: 'center',
-            justifyContent: 'start',
+            paddingBottom: '10px',
             fontSize: '18px',
             color: 'black',
             borderRadius: '10px',
@@ -26,7 +24,7 @@ class Card extends Component {
                 textTransform: 'uppercase',
                 letterSpacing: '7px',
                 fontWeight: '600',
-                marginBottom: '10px',
+                marginBottom: '20px',
             }}>
                 {this.props.title}
             </div> 
