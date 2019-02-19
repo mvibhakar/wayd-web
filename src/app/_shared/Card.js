@@ -9,9 +9,9 @@ class Card extends Component {
             display: 'flex',
             flexDirection: 'column',
             margin: '20px',
-            marginTop: '10px',
+            marginTop: '0px',
             padding: '20px',
-            paddingBottom: '10px',
+            // paddingBottom: '10px',
             fontSize: '18px',
             color: 'black',
             borderRadius: '10px',
@@ -24,7 +24,7 @@ class Card extends Component {
                 textTransform: 'uppercase',
                 letterSpacing: '7px',
                 fontWeight: '600',
-                marginBottom: '20px',
+                // marginBottom: '20px',
             }}>
                 {this.props.title}
             </div> 

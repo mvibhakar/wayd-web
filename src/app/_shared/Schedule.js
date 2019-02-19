@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Card from "../_shared/Card";
+import Card from "./Card";
 
 class Schedule extends Component {
     state = {
@@ -25,7 +25,8 @@ class Schedule extends Component {
 
     render() {
         const timeStyle = {
-            width: "143px",
+            // width: "143px",
+            flex: '1',
             marginRight: "5px",
             textAlign: "left",
             color: "#7EB4CE",
@@ -34,14 +35,15 @@ class Schedule extends Component {
         };
 
         const eventStyle = {
-            width: "182px",
+            // width: "182px",
+            flex: '1',
         };
 
         return (
             <div>
                 <Card title="schedule">
-                    {this.state.items.map(item => (
-                        <div
+                    {this.state.items.map((item, idx) => (
+                        <div key={idx}
                             style={{
                                 display: "flex"
                             }}
