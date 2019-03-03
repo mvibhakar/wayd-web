@@ -16,13 +16,10 @@ class Home extends Component {
                     left: "0px",
                     right: "0px",
                     overflow: "auto"
-                    // display: 'flex',
-                    // alignItems: 'center',
-                    // flexDirection: 'column',
                 }}
             >
                 <Calendar />
-                <Link to="/today" style={{ backgroundColor: 'green', }}>
+                <Link to="/today" style={{ backgroundColor: "green" }}>
                     <HomeButton title="to-do" />
                 </Link>
 

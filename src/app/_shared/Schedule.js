@@ -14,19 +14,20 @@ class Schedule extends Component {
             },
             {
                 time: "6:00pm - 7:00pm",
-                event: "Vestibulum ornare, nisl nec malesuada hendrerit, erat elit fringilla eros, in auctor lacus"
+                event:
+                    "Vestibulum ornare, nisl nec malesuada hendrerit, erat elit fringilla eros, in auctor lacus"
             },
             {
                 time: "8:00pm - 10:00pm",
-                event: "Praesent sed nisl justo. Morbi consectetur felis non suscipit tincidunt. "
+                event:
+                    "Praesent sed nisl justo. Morbi consectetur felis non suscipit tincidunt. "
             }
         ]
     };
 
     render() {
         const timeStyle = {
-            // width: "143px",
-            flex: '1',
+            flex: "1",
             marginRight: "5px",
             textAlign: "left",
             color: "#7EB4CE",
@@ -35,15 +36,15 @@ class Schedule extends Component {
         };
 
         const eventStyle = {
-            // width: "182px",
-            flex: '1',
+            flex: "1"
         };
 
         return (
             <div>
                 <Card title="schedule">
                     {this.state.items.map((item, idx) => (
-                        <div key={idx}
+                        <div
+                            key={idx}
                             style={{
                                 display: "flex"
                             }}

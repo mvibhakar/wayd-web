@@ -11,11 +11,7 @@ class Calendar extends Component {
         this.state = {};
     }
 
-    Navbar({
-        onPreviousClick,
-        onNextClick,
-        className,
-    }) {
+    Navbar({ onPreviousClick, onNextClick, className }) {
         const style = {
             position: "absolute",
             top: "1em",
@@ -53,17 +49,22 @@ class Calendar extends Component {
         );
     }
     handleDayClick(day) {
-        console.log(moment(day).format('DD-MM-YYYY'));
+        console.log(moment(day).format("DD-MM-YYYY"));
         this.setState({
             selectedDay: day
         });
     }
 
     render() {
-        
         if (this.state.selectedDay) {
-            return <Redirect to={`/day/${moment(this.state.selectedDay).format('DD-MM-YYYY')}`} />;
-          }
+            return (
+                <Redirect
+                    to={`/day/${moment(this.state.selectedDay).format(
+                        "DD-MM-YYYY"
+                    )}`}
+                />
+            );
+        }
 
         return (
             <div
@@ -73,8 +74,6 @@ class Calendar extends Component {
                     flexDirection: "column",
                     margin: "20px",
                     marginTop: "10px",
-                    // padding: '20px',
-                    // paddingTop: '10px',
                     fontSize: "18px",
                     color: "black",
                     borderRadius: "10px",

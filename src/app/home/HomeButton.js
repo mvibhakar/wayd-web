@@ -21,9 +21,7 @@ class HomeButton extends Component {
                             letterSpacing: "8px"
                         }}
                     >
-                        {/* <Link to="/today"> */}
                         {this.props.title}
-                        {/* </Link> */}
                     </div>
                 </Card>
             </div>

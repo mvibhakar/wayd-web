@@ -11,7 +11,7 @@ body {
     text-decoration: none;
 }
 * {
-  outline: none !important;
+    outline: none !important;
 }
 
 code {
@@ -24,6 +24,14 @@ p {
 }
 
 a {
-  text-decoration: none;
-  color: inherit !important;
+    text-decoration: none;
+    color: inherit !important;
+}
+
+.DayPicker-Caption {
+    color: #7eb4ce;
+}
+
+.DayPicker-Caption > div {
+    font-size: 1.3em;
 }

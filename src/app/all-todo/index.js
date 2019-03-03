@@ -5,16 +5,13 @@ import ToDo from "../_shared/ToDo";
 
 class Day extends Component {
     render() {
+        console.log(this.props.match);
         return (
             <div
                 style={{
                     position: "absolute",
-                    width: "100%",
                     top: "56px",
-                    bottom: "0px",
-                    left: "0px",
-                    right: "0px",
-                    overflow: "auto"
+                    bottom: "0px"
                 }}
             >
                 <Schedule />
