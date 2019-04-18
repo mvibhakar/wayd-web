@@ -9,12 +9,13 @@ class Card extends Component {
                     display: "flex",
                     flexDirection: "column",
                     margin: "20px",
-                    marginTop: "10px",
+                    marginTop: "0px",
                     padding: "20px",
-                    paddingBottom: "30px",
+                    paddingBottom: "10px",
                     fontSize: "18px",
                     color: "black",
-                    borderRadius: "10px"
+                    borderRadius: "10px",
+                    maxWidth: "560px"
                 }}
             >
                 <div

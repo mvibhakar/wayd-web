@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import moment from "moment";
 
 class Header extends Component {
     state = {
         path: this.props.location.pathname
     };
+
     componentWillMount() {
         this.props.history.listen(location => {
             this.setState({ path: location.pathname });
@@ -15,30 +17,48 @@ class Header extends Component {
         let title = "wayd";
 
         if (this.state.path.includes("/day")) {
-            // show today if it's today
-            // show tomorrow if it's tomorrow
-            // show yesterday ...
-            // show christmas if it's christmas?
-            title = this.state.path.split("/")[2];
-        }
+            var current = moment();
 
+            var dateStringFromUrl = this.state.path.split("/")[2];
+            dateStringFromUrl = dateStringFromUrl.split("-");
+            var todayDate = new Date(
+                dateStringFromUrl[2],
+                dateStringFromUrl[1] - 1,
+                dateStringFromUrl[0]
+            );
+            var date = moment(todayDate);
+            var yesterday = moment(todayDate, "DD-MM-YYYY").subtract(1, "days");
+            var tomorrow = moment(todayDate, "DD-MM-YYYY").add(1, "days");
+            if (date.isSame(current, "d")) {
+                title = "today";
+            } else if (yesterday.isSame(current, "d")) {
+                title = "tomorrow";
+            } else if (tomorrow.isSame(current, "d")) {
+                title = "yesterday";
+            } else {
+                title = moment(date).format("MMMM Do");
+            }
+        } else if (
+            this.state.path.includes("/login") ||
+            this.state.path.includes("/signup") ||
+            this.state.path.includes("/create-choice")
+        ) {
+            title = "";
+        }
         return title;
     };
 
     getHeaderCenterAction = () => {
-        if (this.state.path === "/login") {
+        if (
+            this.state.path === "/login" ||
+            this.state.path === "/signup" ||
+            this.state.path === "/create-choice"
+        ) {
             return null;
         } else {
             return (
                 <div>
-                    <Link
-                        to="/"
-                        style={{
-                            flex: "3",
-                            paddingTop: "5px",
-                            textAlign: "start"
-                        }}
-                    >
+                    <Link to="/">
                         <i className="material-icons">close</i>
                     </Link>
                 </div>
@@ -47,18 +67,15 @@ class Header extends Component {
     };
 
     getHeaderLeftAction = () => {
-        if (this.state.path === "/" || this.state.path === "/login") {
+        if (
+            this.state.path === "/" ||
+            this.state.path === "/login" ||
+            this.state.path === "/signup"
+        ) {
             return null;
         } else {
             return (
-                <Link
-                    to="/"
-                    style={{
-                        flex: "3",
-                        paddingTop: "5px",
-                        textAlign: "start"
-                    }}
-                >
+                <Link to="/">
                     <i className="material-icons">close</i>
                 </Link>
             );
@@ -66,24 +83,38 @@ class Header extends Component {
     };
 
     getHeaderRightAction = () => {
-        if (this.state.path === "/" || this.state.path === "/login") {
+        if (
+            this.state.path === "/" ||
+            this.state.path === "/login" ||
+            this.state.path === "/signup" ||
+            this.state.path === "/create-choice"
+        ) {
             return null;
-        } else {
+        } else if (this.state.path.includes("/day")) {
+            var dateStringFromUrl = this.state.path.split("/")[2];
+            dateStringFromUrl = dateStringFromUrl.split("-");
+            var todayDate = new Date(
+                dateStringFromUrl[2],
+                dateStringFromUrl[1] - 1,
+                dateStringFromUrl[0]
+            );
+            var yesterday = moment(todayDate, "DD-MM-YYYY").subtract(1, "days");
+            var tomorrow = moment(todayDate, "DD-MM-YYYY").add(1, "days");
             return (
-                <div
-                    style={{
-                        flex: "3"
-                    }}
-                >
-                    <i
-                        className="material-icons"
-                        style={{
-                            marginRight: "0.5em"
-                        }}
-                    >
-                        keyboard_arrow_left
-                    </i>
-                    <i className="material-icons">keyboard_arrow_right</i>
+                <div>
+                    <Link to={`/day/${yesterday.format("DD-MM-YYYY")}`}>
+                        <i
+                            className="material-icons"
+                            style={{
+                                marginRight: "15px"
+                            }}
+                        >
+                            keyboard_arrow_left
+                        </i>
+                    </Link>
+                    <Link to={`/day/${tomorrow.format("DD-MM-YYYY")}`}>
+                        <i className="material-icons">keyboard_arrow_right</i>
+                    </Link>
                 </div>
             );
         }
@@ -93,41 +124,63 @@ class Header extends Component {
         return (
             <div
                 style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                     height: "56px",
                     background: "#F5F5F5",
-                    position: "absolute",
+                    position: "fixed",
                     top: "0px",
+                    left: "0px",
                     width: "100%",
-                    textAlign: "center"
+                    zIndex: "1"
                 }}
             >
                 <div
                     style={{
-                        flex: "1"
-                    }}
-                />
-                <div>{this.getHeaderLeftAction()}</div>
-                <div
-                    style={{
-                        flex: "12",
-                        fontSize: "19px",
-                        color: "#353535",
-                        textTransform: "uppercase",
-                        letterSpacing: "8px",
-                        textAlign: "center"
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        maxWidth: "560px",
+                        height: "56px",
+                        margin: "0 auto",
+                        padding: "0 20px"
                     }}
                 >
-                    <div>{this.getHeaderName()}</div>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "65px",
+                            justifyContent: "start",
+                            alignItems: "center",
+                            paddingTop: "5px"
+                        }}
+                    >
+                        <div>{this.getHeaderLeftAction()}</div>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            flex: 1,
+                            fontSize: "19px",
+                            color: "#353535",
+                            textTransform: "uppercase",
+                            letterSpacing: "8px",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <div>{this.getHeaderName()}</div>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            width: "65px",
+                            justifyContent: "end",
+                            alignItems: "end",
+                            paddingTop: "5px"
+                        }}
+                    >
+                        <div>{this.getHeaderRightAction()}</div>
+                    </div>
                 </div>
-                <div>{this.getHeaderRightAction()}</div>
-                <div
-                    style={{
-                        flex: "1"
-                    }}
-                />
             </div>
         );
     }

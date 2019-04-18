@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Login extends Component {
+class Signup extends Component {
     render() {
         return (
             <div
@@ -64,7 +64,7 @@ class Login extends Component {
                         display: "flex",
                         width: "300px",
                         margin: "0 auto",
-                        marginBottom: "25px"
+                        marginBottom: "35px"
                     }}
                 >
                     <i class="material-icons" style={{ margin: "5px" }}>
@@ -75,6 +75,35 @@ class Login extends Component {
                             type="password"
                             name="user_password"
                             placeholder="Password"
+                            style={{
+                                backgroundColor: "#f5f5f5",
+                                border: "none",
+                                marginLeft: "20px",
+                                marginTop: "5px",
+                                fontFamily: "Raleway, sans-serif",
+                                letterSpacing: "2px",
+                                fontSize: "17px"
+                            }}
+                        />
+                    </form>
+                </div>
+                <div
+                    style={{
+                        borderBottom: "0.5px solid #D8D8D8",
+                        display: "flex",
+                        width: "300px",
+                        margin: "0 auto",
+                        marginBottom: "25px"
+                    }}
+                >
+                    <i class="material-icons" style={{ margin: "5px" }}>
+                        lock_outline
+                    </i>
+                    <form>
+                        <input
+                            type="password"
+                            name="user_verify"
+                            placeholder="Verify Password"
                             style={{
                                 backgroundColor: "#f5f5f5",
                                 border: "none",
@@ -111,7 +140,7 @@ class Login extends Component {
                                 color: "white"
                             }}
                         >
-                            Log In
+                            Sign Up
                         </button>
                     </form>
                 </div>
@@ -128,7 +157,7 @@ class Login extends Component {
                             marginRight: "5px"
                         }}
                     >
-                        Don't have an account?
+                        Have an account already?
                     </div>
                     <div
                         style={{
@@ -136,7 +165,7 @@ class Login extends Component {
                             color: "#7EB4CE"
                         }}
                     >
-                        <Link to="/signup">Create one.</Link>
+                        <Link to="/login">Log in.</Link>
                     </div>
                 </div>
             </div>
@@ -144,4 +173,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Signup;

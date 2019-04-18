@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import Thoughts from "../_shared/Thoughts";
-import Schedule from "../_shared/Schedule";
-import ToDo from "../_shared/ToDo";
+import Thought from "../_shared/Thought";
 
-class Day extends Component {
+class Thoughts extends Component {
     render() {
-        console.log(this.props.match);
         return (
             <div
                 style={{
@@ -14,12 +11,10 @@ class Day extends Component {
                     bottom: "0px"
                 }}
             >
-                <Schedule />
-                <ToDo />
-                <Thoughts />
+                <Thought />
             </div>
         );
     }
 }
 
-export default Day;
+export default Thoughts;

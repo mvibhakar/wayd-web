@@ -1,62 +1,45 @@
-import React, { Component } from "react";
+import React from "react";
 import Card from "./Card";
+import Loading from "../_shared/Loading";
+import { Link } from "react-router-dom";
 
-class Schedule extends Component {
-    state = {
-        items: [
-            {
-                time: "8:ooam - 10:00am",
-                event: "Nullam nisl"
-            },
-            {
-                time: "12:00pm - 3:00pm",
-                event: "Quisque porta ex"
-            },
-            {
-                time: "6:00pm - 7:00pm",
-                event:
-                    "Vestibulum ornare, nisl nec malesuada hendrerit, erat elit fringilla eros, in auctor lacus"
-            },
-            {
-                time: "8:00pm - 10:00pm",
-                event:
-                    "Praesent sed nisl justo. Morbi consectetur felis non suscipit tincidunt. "
-            }
-        ]
+const Schedule = ({ loading, events }) => {
+    const timeStyle = {
+        flex: "1",
+        marginRight: "5px",
+        textAlign: "left",
+        color: "#7EB4CE",
+        fontWeight: "600",
+        fontStyle: "italic"
     };
 
-    render() {
-        const timeStyle = {
-            flex: "1",
-            marginRight: "5px",
-            textAlign: "left",
-            color: "#7EB4CE",
-            fontWeight: "600",
-            fontStyle: "italic"
-        };
+    const eventStyle = {
+        flex: "1"
+    };
 
-        const eventStyle = {
-            flex: "1"
-        };
-
-        return (
-            <div>
-                <Card title="schedule">
-                    {this.state.items.map((item, idx) => (
+    return (
+        <Card title="schedule">
+            {loading ? (
+                <Loading />
+            ) : (
+                events.map((item, idx) => (
+                    <Link to="/signup">
                         <div
                             key={idx}
                             style={{
                                 display: "flex"
                             }}
                         >
-                            <p style={timeStyle}>{item.time}</p>
-                            <p style={eventStyle}>{item.event}</p>
+                            <p style={timeStyle}>
+                                {item.start_time} - {item.end_time}
+                            </p>
+                            <p style={eventStyle}>{item.title}</p>
                         </div>
-                    ))}
-                </Card>
-            </div>
-        );
-    }
-}
+                    </Link>
+                ))
+            )}
+        </Card>
+    );
+};
 
 export default Schedule;

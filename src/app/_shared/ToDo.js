@@ -1,36 +1,14 @@
 import React, { Component } from "react";
 import Card from "./Card";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
 
 class ToDo extends Component {
-    state = {
-        items: [
-            {
-                isChecked: true,
-                event: "Nullam nisl"
-            },
-            {
-                isChecked: false,
-                event: "Quisque porta ex"
-            },
-            {
-                isChecked: false,
-                event:
-                    "Vestibulum ornare, nisl nec malesuada hendrerit, erat elit fringilla eros, in auctor lacus"
-            },
-            {
-                isChecked: false,
-                event:
-                    "Praesent sed nisl justo. Morbi consectetur felis non suscipit tincidunt. "
-            }
-        ]
-    };
-
     handleChange = (event, idx) => {
         const isChecked = event.target.checked;
-        const items = this.state.items;
+        const items = this.props.todos;
 
-        items[idx].isChecked = isChecked;
+        items[idx].checked = isChecked;
         this.setState({ items });
     };
 
@@ -38,17 +16,18 @@ class ToDo extends Component {
         return (
             <div>
                 <Card title="to-do">
-                    {this.state.items.map((item, idx) => (
+                    {this.props.todos.map((item, idx) => (
                         <div
                             key={idx}
                             style={{
                                 display: "flex",
                                 borderBottom: "0.5px solid #D8D8D8",
-                                marginBottom: "15px"
+                                marginBottom: "15px",
+                                paddingBottom: "5px"
                             }}
                         >
                             <Checkbox
-                                checked={item.isChecked}
+                                checked={item.checked}
                                 onChange={event =>
                                     this.handleChange(event, idx)
                                 }
@@ -61,7 +40,14 @@ class ToDo extends Component {
                                     height: "0px"
                                 }}
                             />
-                            <p>{item.event}</p>
+                            <Link
+                                to="/login"
+                                style={{
+                                    paddingTop: "3px"
+                                }}
+                            >
+                                {item.title}
+                            </Link>
                         </div>
                     ))}
                 </Card>

@@ -73,11 +73,12 @@ class Calendar extends Component {
                     display: "flex",
                     flexDirection: "column",
                     margin: "20px",
-                    marginTop: "10px",
+                    marginTop: "0px",
                     fontSize: "18px",
                     color: "black",
                     borderRadius: "10px",
-                    alignItems: "center"
+                    alignItems: "center",
+                    maxWidth: "600px"
                 }}
             >
                 <DayPicker

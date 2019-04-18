@@ -14,11 +14,12 @@ class HomeButton extends Component {
                             justifyContent: "center",
                             flexDirection: "column",
                             padding: "8px",
+                            paddingBottom: "30px",
                             borderRadius: "10px",
                             fontSize: "19px",
                             color: "#353535",
                             textTransform: "uppercase",
-                            letterSpacing: "8px"
+                            letterSpacing: "8px",
                         }}
                     >
                         {this.props.title}
