@@ -5,35 +5,8 @@ import { Link } from "react-router-dom";
 class CreateChoice extends Component {
     render() {
         return (
-            <div
-                style={{
-                    position: "absolute",
-                    width: "100%",
-                    top: "56px",
-                    bottom: "0px",
-                    left: "0px",
-                    right: "0px",
-                    overflow: "auto"
-                }}
-            >
-                <p
-                    style={{
-                        textTransform: "uppercase",
-                        textAlign: "center",
-                        fontWeight: "normal",
-                        letterSpacing: "6px",
-                        fontSize: "12px",
-                        marginTop: "50px",
-                        marginBottom: "15px"
-                    }}
-                >
-                    Add something to your...
-                </p>
-                <div
-                    style={{
-                        color: "#7EB4CE"
-                    }}
-                >
+            <div>
+                <div>
                     <Link to="/create-event">
                         <HomeButton title="schedule" />
                     </Link>

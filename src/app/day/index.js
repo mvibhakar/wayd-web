@@ -1,17 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Thought from "../_shared/Thought";
 import Schedule from "../_shared/Schedule";
 import ToDo from "../_shared/ToDo";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { saveEventsToState } from "../../state/_actions";
 
 class Day extends Component {
     state = {
-        items: {
-            events: [],
-            todos: [],
-            thoughts: []
-        },
         fetchingData: false
     };
 
@@ -22,8 +19,8 @@ class Day extends Component {
             .get("http://localhost:8000/api/day/2019-02-18")
             .then(response => {
                 console.warn("API CALL: Success");
-                const items = response.data;
-                this.setState({ items });
+                console.log(response.data);
+                this.props.dispatch(saveEventsToState(response.data.events));
                 this.setState({ fetchingData: false });
             })
             .catch(error => {
@@ -32,20 +29,20 @@ class Day extends Component {
             });
     }
     render() {
-        console.log(this.state.items.thoughts);
+        console.log(this.props.thoughts);
         return (
             <div>
                 <Schedule
                     loading={this.state.fetchingData}
-                    events={this.state.items.events}
+                    events={this.props.events || []}
                 />
                 <ToDo
                     loading={this.state.fetchingData}
-                    todos={this.state.items.todos}
+                    todos={this.props.todos || []}
                 />
                 <Thought
                     loading={this.state.fetchingData}
-                    thoughts={this.state.items.thoughts}
+                    thoughts={this.props.thoughts || []}
                 />
                 <div>
                     <Link to="/create-choice">
@@ -67,4 +64,15 @@ class Day extends Component {
     }
 }
 
-export default Day;
+// export default Day;
+
+const mapStateToProps = state => {
+    const { events, todos, thoughts } = state;
+    return {
+        events,
+        todos,
+        thoughts
+    };
+};
+
+export default connect(mapStateToProps)(Day);

@@ -38,6 +38,10 @@ class Header extends Component {
             } else {
                 title = moment(date).format("MMMM Do");
             }
+        } else if (this.state.path === "/create-choice") {
+            title = "add to my:";
+        } else if (this.state.path === "/create-event") {
+            title = "add an event";
         } else if (
             this.state.path.includes("/login") ||
             this.state.path.includes("/signup") ||
@@ -73,6 +77,16 @@ class Header extends Component {
             this.state.path === "/signup"
         ) {
             return null;
+        } else if (
+            this.state.path === "/create-event" ||
+            this.state.path === "/create-todo" ||
+            this.state.path === "/create-thought"
+        ) {
+            return (
+                <Link to="/create-choice">
+                    <i className="material-icons">close</i>
+                </Link>
+            );
         } else {
             return (
                 <Link to="/">
@@ -114,6 +128,23 @@ class Header extends Component {
                     </Link>
                     <Link to={`/day/${tomorrow.format("DD-MM-YYYY")}`}>
                         <i className="material-icons">keyboard_arrow_right</i>
+                    </Link>
+                </div>
+            );
+        } else if (
+            this.state.path === "/create-event" ||
+            this.state.path === "/create-todo" ||
+            this.state.path === "/create-thought"
+        ) {
+            return (
+                <div>
+                    <Link
+                        to="/"
+                        style={{
+                            marginLeft: "41px"
+                        }}
+                    >
+                        <i class="material-icons">done</i>
                     </Link>
                 </div>
             );

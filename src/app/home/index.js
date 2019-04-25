@@ -8,11 +8,11 @@ class Home extends Component {
     render() {
         return (
             <div
-                style={{
-                    margin: "56px auto 0",
-                    maxWidth: "600px",
-                    overflow: "auto"
-                }}
+                style={
+                    {
+                        // overflow: "auto"
+                    }
+                }
             >
                 <Calendar />
 
