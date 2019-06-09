@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import {
     BrowserRouter as Router,
+    // PrivateRoute,
     Route,
     Switch,
     Redirect
 } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Header from "./_shared/Header";
 import Day from "./day";
@@ -19,7 +21,40 @@ import CreateEvent from "./create-event";
 import CreateToDo from "./create-todo";
 import CreateThought from "./create-thought";
 
+import { setCuser, setToken } from "../state/_actions";
+import axios from "axios";
+
+const isAuthenticated = () => localStorage.getItem("token") && true;
+export const token = () => localStorage.getItem("token");
+
 class App extends Component {
+    state = { loading: true };
+
+    componentWillMount() {
+        if (isAuthenticated()) {
+            // go get cuser then show the main screen
+            axios
+                .get("http://localhost:8000/api/user/", {
+                    headers: {
+                        Authorization: "Bearer " + token()
+                    }
+                })
+                .then(response => {
+                    this.props.dispatch(setCuser(response.data.user));
+                    this.setState({ loading: false });
+                })
+                .catch(error => {
+                    console.warn("failed to authorize", error);
+                    this.setState({ loading: false });
+                    this.props.dispatch(setCuser());
+                    this.props.dispatch(setToken());
+                });
+        } else {
+            // just show login screen like normal
+            this.setState({ loading: false });
+        }
+    }
+
     render() {
         console.log(typeof Day);
         return (
@@ -32,30 +67,42 @@ class App extends Component {
                             maxWidth: "600px"
                         }}
                     >
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/day/:date" component={Day} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/signup" component={Signup} />
-                            <Route path="/to-dos" component={ToDos} />
-                            <Route path="/lists" component={Lists} />
-                            <Route path="/thoughts" component={Thoughts} />
-                            <Route
-                                path="/create-choice"
-                                component={CreateChoice}
-                            />
-                            <Route
-                                path="/create-event"
-                                component={CreateEvent}
-                            />
-                            {/* <Route path="/create-todo" component={CreateToDo} /> */}
-                            {/* <Route
+                        {this.state.loading && <div>Loading...</div>}
+                        {!this.state.loading && (
+                            <Switch>
+                                <Route path="/login" component={Login} />
+                                <Route path="/signup" component={Signup} />
+                                <PrivateRoute exact path="/" component={Home} />
+                                <PrivateRoute
+                                    path="/day/:date"
+                                    component={Day}
+                                />
+                                <PrivateRoute
+                                    path="/to-dos"
+                                    component={ToDos}
+                                />
+                                <PrivateRoute path="/lists" component={Lists} />
+                                <PrivateRoute
+                                    path="/thoughts"
+                                    component={Thoughts}
+                                />
+                                <PrivateRoute
+                                    path="/create-choice"
+                                    component={CreateChoice}
+                                />
+                                <PrivateRoute
+                                    path="/create-event"
+                                    component={CreateEvent}
+                                />
+                                {/* <PrivateRoute path="/create-todo" component={CreateToDo} /> */}
+                                {/* <PrivateRoute
                                 path="/create-thought"
                                 component={CreateThought}
                             /> */}
-                            <Route path="/to-dos/:id" />
-                            <Redirect to="/" />
-                        </Switch>
+                                <PrivateRoute path="/to-dos/:id" />
+                                <Redirect to="/" />
+                            </Switch>
+                        )}
                     </div>
                 </div>
             </Router>
@@ -63,4 +110,22 @@ class App extends Component {
     }
 }
 
-export default App;
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props =>
+            isAuthenticated() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
+                    to={{
+                        pathname: "/login",
+                        state: { from: props.location }
+                    }}
+                />
+            )
+        }
+    />
+);
+
+export default connect()(App);

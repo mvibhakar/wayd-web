@@ -3,8 +3,6 @@ import HomeButton from "../_shared/HomeButton";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "../_shared/Card";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import grey from "@material-ui/core/colors/grey";
 
@@ -30,65 +28,66 @@ class CreateEvent extends Component {
             <Card>
                 <div
                     style={{
-                        margin: "0 10px 20px",
-                        padding: "0 0 10px",
-                        borderBottom: "0.5px solid #D8D8D8"
-                    }}
-                >
-                    <form>
-                        <input
-                            type="text"
-                            name="user_email"
-                            placeholder="Enter event title"
-                            style={{
-                                border: "none",
-                                fontFamily: "Raleway, sans-serif",
-                                letterSpacing: "1px",
-                                fontSize: "18px"
-                            }}
-                        />
-                    </form>
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        margin: "0 10px 20px",
-                        padding: "0 0 10px",
-                        fontSize: "15px",
-                        letterSpacing: "1px",
-                        width: "100%"
+                        padding: "10px"
                     }}
                 >
                     <div
                         style={{
-                            display: "flex",
-                            flex: "1",
-                            alignItems: "center",
-                            justifyContent: "start"
+                            margin: "0 10px 20px",
+                            padding: "0 0 10px",
+                            borderBottom: "0.5px solid #D8D8D8"
                         }}
                     >
-                        All-day
+                        <form>
+                            <input
+                                type="text"
+                                name="user_email"
+                                placeholder="Enter event title"
+                                style={{
+                                    border: "none",
+                                    fontFamily: "Raleway, sans-serif",
+                                    letterSpacing: "1px",
+                                    fontSize: "18px"
+                                }}
+                            />
+                        </form>
                     </div>
                     <div
                         style={{
                             display: "flex",
-                            flex: "1",
-                            marginLeft: "auto"
+                            padding: "0 10px",
+                            fontSize: "15px",
+                            letterSpacing: "1px",
+                            margin: "0 auto"
                         }}
                     >
-                        <FormGroup row>
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        classes={{
-                                            switchBase: classes.colorSwitchBase,
-                                            checked: classes.colorChecked,
-                                            bar: classes.colorBar
-                                        }}
-                                    />
-                                }
+                        <div
+                            style={{
+                                display: "flex",
+                                width: "50%",
+                                alignItems: "center",
+                                justifyContent: "start"
+                            }}
+                        >
+                            All-day
+                        </div>
+                        <div
+                            style={{
+                                display: "flex",
+                                width: "50%",
+                                // marginLeft: "auto",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                        >
+                            <Switch
+                                classes={{
+                                    switchBase: classes.colorSwitchBase,
+                                    checked: classes.colorChecked,
+                                    bar: classes.colorBar
+                                }}
                             />
-                        </FormGroup>
+                        </div>
                     </div>
                 </div>
             </Card>

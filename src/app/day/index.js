@@ -5,7 +5,11 @@ import Schedule from "../_shared/Schedule";
 import ToDo from "../_shared/ToDo";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { saveEventsToState } from "../../state/_actions";
+import {
+    saveEventsToState,
+    saveToDosToState,
+    saveThoughtsToState
+} from "../../state/_actions";
 
 class Day extends Component {
     state = {
@@ -21,6 +25,10 @@ class Day extends Component {
                 console.warn("API CALL: Success");
                 console.log(response.data);
                 this.props.dispatch(saveEventsToState(response.data.events));
+                this.props.dispatch(saveToDosToState(response.data.todos));
+                this.props.dispatch(
+                    saveThoughtsToState(response.data.thoughts)
+                );
                 this.setState({ fetchingData: false });
             })
             .catch(error => {

@@ -40,3 +40,7 @@ a {
 .DayPicker-Caption > div {
     font-size: 1.3em;
 }
+
+.MuiSwitch-root-4 {
+    margin-left: auto !important;
+}
